@@ -1,0 +1,5 @@
+<button class="btn btn-primary btn-raised" (click)="startNewItem()">Start new item</button>
+
+<div *ngIf="items">
+    <item *ngFor="let item of items" [item]="item"></item>
+</div>
