@@ -11,5 +11,6 @@ export class ItemComponent {
     @Input() private item: Item;
 
     private joinClicked() {
+        alert('Not implemented');
     }
 }

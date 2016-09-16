@@ -1,4 +1,4 @@
-<button class="btn btn-primary btn-raised" (click)="startNewItem()">Start new item</button>
+<a class="btn btn-primary btn-raised" routerLink="/new_vote">Start new item</a>
 
 <div *ngIf="items">
     <item *ngFor="let item of items" [item]="item"></item>
