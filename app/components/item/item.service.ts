@@ -2,7 +2,7 @@ import {Http} from "@angular/http";
 import {Injectable} from "@angular/core";
 import {Item} from "./item";
 import {Observable} from "rxjs/Observable";
-import "rxjs/add/observable/of";
+import "rxjs/add/operator/map";
 
 @Injectable()
 export class ItemService {
@@ -10,11 +10,6 @@ export class ItemService {
     }
 
     public getItems(): Observable<Item[]> {
-        var data = [
-            <Item>{id: 1, title: 'test1', description: 'test1 description'},
-            <Item>{id: 2, title: 'test2', description: 'test2 description'},
-            <Item>{id: 3, title: 'test3', description: 'test3 description'}
-        ];
-        return Observable.of(data);
+        return this._http.get('http://localhost:3030/items').map(response => response.json().map(i => <Item>i));
     }
 }
