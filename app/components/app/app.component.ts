@@ -15,9 +15,10 @@ export class AppComponent {
         return this._userService.isLoggedIn();
     }
 
-    private logout(): void {
+    private logout(e: Event): void {
+        e.preventDefault();
         this._userService.logout();
-        this._router.navigateByUrl('/');
+        this._router.navigateByUrl('/index');
     }
 
     private getUsername(): string {

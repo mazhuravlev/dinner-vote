@@ -8,13 +8,15 @@ import {UserService} from "./services/user.service";
 import {LoginComponent} from "./components/login/login.component";
 import {NewVoteComponent} from "./components/newVote/newVote.component";
 import {AuthGuard} from "./services/authGuard.service";
+import {HttpModule} from "@angular/http";
+import {ItemService} from "./components/item/item.service";
 
 
 @NgModule({
-    imports: [BrowserModule, routing],
+    imports: [BrowserModule, HttpModule, routing],
     declarations: [AppComponent, IndexComponent, ItemComponent, LoginComponent, NewVoteComponent],
     bootstrap: [AppComponent],
-    providers: [UserService, AuthGuard]
+    providers: [UserService, AuthGuard, ItemService]
 })
 export class AppModule {
 }
