@@ -1,6 +1,6 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 import {PathTranslator} from "../PathTranslator";
-import {Item} from "./item";
+import {Item} from "../../models/item";
 
 @Component({
     selector: 'item',
@@ -9,8 +9,10 @@ import {Item} from "./item";
 })
 export class ItemComponent {
     @Input() private item: Item;
+    @Input() private canJoin: boolean = true;
+    @Output() private join: EventEmitter<Item> = new EventEmitter<Item>();
 
     private joinClicked() {
-        alert('Not implemented');
+        this.join.emit(this.item);
     }
 }

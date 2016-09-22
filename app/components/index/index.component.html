@@ -1,5 +1,5 @@
 <a class="btn btn-primary btn-raised" routerLink="/new_vote">Start new item</a>
 
 <div *ngIf="items">
-    <item *ngFor="let item of items" [item]="item"></item>
+    <item *ngFor="let item of items" [item]="item" (join)="joinItem($event)" [canJoin]="canJoin"></item>
 </div>

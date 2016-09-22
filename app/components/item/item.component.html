@@ -6,6 +6,6 @@
         {{item.description}}
     </div>
     <div class="panel-footer">
-        <button class="btn btn-primary" (click)="joinClicked()">Join this</button>
+        <button *ngIf="canJoin" class="btn btn-primary" (click)="joinClicked()">Join this</button>
     </div>
 </div>
