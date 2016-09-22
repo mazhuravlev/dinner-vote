@@ -19,13 +19,12 @@ export class HttpService {
     }
 
     private getOptions(): RequestOptionsArgs {
-        return new RequestOptions({
-            headers: new Headers(
-                {
-                    'X-Token': this._userService.token,
-                    'Content-Type': 'application/json'
-                }
-            )
-        });
+        var headers = {
+            'Content-Type': 'application/json'
+        };
+        if (this._userService.token) {
+            headers['Authorization'] = 'Bearer ' + this._userService.token;
+        }
+        return new RequestOptions({headers: new Headers(headers)});
     }
 }
