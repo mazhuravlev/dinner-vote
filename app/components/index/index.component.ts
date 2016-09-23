@@ -30,13 +30,14 @@ export class IndexComponent implements OnInit {
     }
 
     private joinItem(item: Item) {
-        if (!this._userService.isLoggedIn()) {
+        if (this._userService.isLoggedIn()) {
+            this._itemService.join(item).concat(this._itemService.getItems()).subscribe(r => {
+                if (r instanceof Array) {
+                    this.setItems(<Item[]>r);
+                }
+            });
+        } else {
             this._userService.gotoLoginPage('/index');
         }
-        this._itemService.join(item).concat(this._itemService.getItems()).subscribe(r => {
-            if (r instanceof Array) {
-                this.setItems(<Item[]>r);
-            }
-        });
     }
 }

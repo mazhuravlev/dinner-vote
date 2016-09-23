@@ -18,9 +18,10 @@ export class UserService {
     }
 
     public login(login, password): Observable<string> {
+
         if (login === 'test') {
             this._token = 'test_token';
-            this._user.username = login;
+            this._user.name = login;
             this._user.id = 1;
             return Observable.create((o) => o.next(this._redirectUrl));
         } else {
@@ -32,21 +33,25 @@ export class UserService {
         this._token = null;
     }
 
-    set redirectUrl(value: string) {
-        this._redirectUrl = value;
-    }
-
-    get username(): string {
-        return this._user.username;
-    }
-
     get token(): string {
         return this._token;
+    }
+
+    set token(value) {
+        this._token = value;
+    }
+
+    set redirectUrl(value: string) {
+        this._redirectUrl = value;
     }
 
     public gotoLoginPage(returnUrl: string) {
         this._redirectUrl = returnUrl;
         this._router.navigateByUrl('/login');
+    }
+
+    public onAfterLogin() {
+        this._router.navigateByUrl(this._redirectUrl);
     }
 
     get user(): User {

@@ -22,6 +22,6 @@ export class AppComponent {
     }
 
     private getUsername(): string {
-        return this._userService.username;
+        return this._userService.user.name;
     }
 }

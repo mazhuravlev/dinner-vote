@@ -4,18 +4,18 @@ import {Observable} from "rxjs";
 import {UserService} from "./user.service";
 
 @Injectable()
-export class HttpService {
+export class ApiService {
     constructor(private _http: Http, private _userService: UserService) {
     }
 
     get(url: string): Observable<Response> {
-        return this._http.get(url, this.getOptions());
+        return this._http.get(ApiService.apiUrl(url), this.getOptions());
     }
 
     post(url: string, data): Observable<Response> {
         var body = 'string' === typeof data ? data : JSON.stringify(data);
 
-        return this._http.post(url, body, this.getOptions());
+        return this._http.post(ApiService.apiUrl(url), body, this.getOptions());
     }
 
     private getOptions(): RequestOptionsArgs {
@@ -26,5 +26,9 @@ export class HttpService {
             headers['Authorization'] = 'Bearer ' + this._userService.token;
         }
         return new RequestOptions({headers: new Headers(headers)});
+    }
+
+    private static apiUrl(path: string) {
+        return 'http://localhost:3030' + path;
     }
 }
