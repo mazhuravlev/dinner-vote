@@ -11,13 +11,15 @@ import {AuthGuard} from "./services/authGuard.service";
 import {HttpModule} from "@angular/http";
 import {ItemService} from "./services/item.service";
 import {ApiService} from "./services/api.service";
+import {ProfileComponent} from "./components/profile/profile.component";
+import {ProfileService} from "./services/profile.service";
 
 
 @NgModule({
     imports: [BrowserModule, HttpModule, routing],
-    declarations: [AppComponent, IndexComponent, ItemComponent, LoginComponent, NewVoteComponent],
+    declarations: [AppComponent, IndexComponent, ItemComponent, LoginComponent, NewVoteComponent, ProfileComponent],
     bootstrap: [AppComponent],
-    providers: [UserService, AuthGuard, ItemService, ApiService]
+    providers: [UserService, AuthGuard, ItemService, ApiService, ProfileService]
 })
 export class AppModule {
 }

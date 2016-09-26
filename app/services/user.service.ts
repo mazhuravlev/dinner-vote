@@ -1,35 +1,25 @@
 import {Injectable} from "@angular/core";
-import {Observable} from "rxjs/Observable";
 import {Router} from "@angular/router";
 import {User} from "../models/user";
 
 @Injectable()
 export class UserService {
+    private static TOKEN_KEY: string = '_token';
+
     private _token: string = null;
     private _redirectUrl = '/';
     private _user: User = new User();
 
     constructor(private _router: Router) {
-        this._token = localStorage.getItem('_token');
+        this._token = localStorage.getItem(UserService.TOKEN_KEY);
     }
 
     public isLoggedIn(): boolean {
         return !!this._token;
     }
 
-    public login(login, password): Observable<string> {
-
-        if (login === 'test') {
-            this._token = 'test_token';
-            this._user.name = login;
-            this._user.id = 1;
-            return Observable.create((o) => o.next(this._redirectUrl));
-        } else {
-            return Observable.create((o) => o.error(new Error('Invalid credentials')));
-        }
-    }
-
     public logout(): void {
+        localStorage.removeItem(UserService.TOKEN_KEY);
         this._token = null;
     }
 
@@ -38,6 +28,7 @@ export class UserService {
     }
 
     set token(value) {
+        localStorage.setItem(UserService.TOKEN_KEY, value);
         this._token = value;
     }
 
